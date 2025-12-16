@@ -1,12 +1,31 @@
 // Content script to inject GitHub import button into lovable.dev
 
+// Helper to find element by content since :contains is not valid in querySelector
+function findElementByContent(selector, text) {
+  const elements = document.querySelectorAll(selector);
+  for (const element of elements) {
+    if (element.textContent.includes(text)) {
+      return element;
+    }
+  }
+  return null;
+}
+
+// Find the target button
+function findTargetButton() {
+  const signupButton = document.querySelector('button[id*="signup-link"]');
+  if (signupButton) return signupButton;
+
+  return findElementByContent('button', "Get started");
+}
+
 // Wait for the page to load completely
-function waitForElement(selector, callback, timeout = 5000) {
-  if (document.querySelector(selector)) {
+function waitForElement(checkFn, callback, timeout = 5000) {
+  if (checkFn()) {
     callback();
   } else {
     setTimeout(() => {
-      waitForElement(selector, callback, timeout - 100);
+      waitForElement(checkFn, callback, timeout - 100);
     }, 100);
   }
 }
@@ -19,7 +38,7 @@ function injectGitHubImportButton() {
   }
 
   // Find the target location - near the Get started button
-  const getStartedButton = document.querySelector('button[id*="signup-link"], button:contains("Get started")');
+  const getStartedButton = findTargetButton();
   
   if (getStartedButton) {
     // Create the GitHub import button
@@ -46,7 +65,7 @@ function injectGitHubImportButton() {
 }
 
 // Wait for the page to load and inject the button
-waitForElement('button[id*="signup-link"], button:contains("Get started")', injectGitHubImportButton);
+waitForElement(findTargetButton, injectGitHubImportButton);
 
 // Also inject when the page changes (SPA navigation)
 let lastUrl = location.href;
