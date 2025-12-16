@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Lovable GitHub Import</title>
+  <link rel="stylesheet" href="../scripts/content.css">
+</head>
+<body>
+  <div id="lovable-github-import-popup">
+    <h2>Import from GitHub</h2>
+    <button class="close-btn" id="close-popup">×</button>
+
+    <div id="auth-section">
+      <p>Connect your GitHub account to import repositories.</p>
+      <button id="connect-github-btn" class="btn-primary">Connect with GitHub</button>
+    </div>
+
+    <div id="repos-section" style="display: none;">
+      <input type="text" id="repo-search" placeholder="Search repositories...">
+      <div id="repos-list"></div>
+      <button id="import-btn" class="btn-primary" disabled>Import Selected Repository</button>
+      <button id="disconnect-btn" class="btn-secondary">Disconnect GitHub</button>
+    </div>
+
+    <div id="progress-section" style="display: none;">
+      <div class="progress-bar">
+        <div class="progress-bar-fill" id="progress-fill"></div>
+      </div>
+      <div class="status-message" id="status-message">Starting import...</div>
+      <button id="cancel-import-btn" class="btn-secondary">Cancel Import</button>
+    </div>
+
+    <div id="complete-section" style="display: none;">
+      <div class="status-message success" id="complete-message">Import completed successfully!</div>
+      <button id="view-project-btn" class="btn-primary">View Project</button>
+      <button id="new-import-btn" class="btn-secondary">Import Another</button>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
