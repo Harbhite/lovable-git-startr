@@ -107,7 +107,7 @@ function filterRepositories() {
 function connectGitHub() {
   // Open GitHub OAuth popup
   const popup = window.open(
-    'https://github.com/login/oauth/authorize?client_id=YOUR_CLIENT_ID&scope=repo',
+    'https://github.com/login/oauth/authorize?client_id=Ov23ctuhgdotRJSuq9KX&scope=repo',
     'GitHub OAuth',
     'width=800,height=600'
   );
